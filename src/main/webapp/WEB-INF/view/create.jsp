@@ -31,8 +31,8 @@ input {
 <div>
 	<form:form modelAttribute="create">
 		<div class="input-group">
-			<label>Id</label>
-			<form:input path="id" type="hidden" />
+			<label>Username</label>
+			<form:input path="username" type="hidden" />
 		</div>
 		<div class="input-group">
 			<label>Name</label>

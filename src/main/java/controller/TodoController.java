@@ -59,10 +59,10 @@ public class TodoController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public String updateGet(@RequestParam(name="id") int id,@ModelAttribute("todo") TodoModel todoM, 
+	public String updateGet(@RequestParam(name="username") String username,@ModelAttribute("todo") TodoModel todoM, 
 			BindingResult result,  Model model) throws ParseException
 	{
-		Todo a=todoService.findTodo(id);
+		Todo a=todoService.findTodo(username);
 		if(a==null)
 		{
 			System.out.println("Khong tim thay todo");
@@ -101,13 +101,13 @@ public class TodoController {
 	}
 	
 	@RequestMapping(value="/start",method=RequestMethod.POST)
-	public String startPost(@RequestParam(name="id") int id, Model model)
+	public String startPost(@RequestParam(name="username") String username, Model model)
 	{
 		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
-		Todo a=todoService.findTodo(id);
+		Todo a=todoService.findTodo(username);
 		a.setStatus("In-progress");
 		a.setStartAt(time);
 		todoService.updateTodo(a);
@@ -117,13 +117,13 @@ public class TodoController {
 	}
 	
 	@RequestMapping(value="/end",method=RequestMethod.POST)
-	public String endPost(@RequestParam(name="id") int id, @ModelAttribute("todo") Todo todo,
+	public String endPost(@RequestParam(name="username") String username, @ModelAttribute("todo") Todo todo,
 		BindingResult result, Model model) throws ParseException
 	{
 		DateTimeFormatter date= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
-		Todo b=todoService.findTodo(id);
+		Todo b=todoService.findTodo(username);
 		
 		b.setStatus("Done");
 		b.setEndAt(time);
@@ -137,14 +137,14 @@ public class TodoController {
 	}
 	
 	@RequestMapping(value="/cancel",method=RequestMethod.POST)
-	public String cancelPost(@RequestParam(name="id") int id,
+	public String cancelPost(@RequestParam(name="username") String username,
 			Model model) throws ParseException
 	{
 		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
-		Todo c=todoService.findTodo(id);
+		Todo c=todoService.findTodo(username);
 		c.setStatus("Canceled");
 		c.setEndAt(time);
 		todoService.updateTodo(c);
@@ -153,10 +153,10 @@ public class TodoController {
 	}
 	
 	@RequestMapping(value="/view",method=RequestMethod.POST)
-	public String viewPost(@RequestParam(name="id") int id, 
+	public String viewPost(@RequestParam(name="username") String username, 
 			Model model) throws ParseException
 	{
-		Todo todo=todoService.findTodo(id);
+		Todo todo=todoService.findTodo(username);
 		if(todo==null)
 			return "redirect:/todo";
 		
@@ -171,10 +171,10 @@ public class TodoController {
 	}
 	
 	@RequestMapping(value="/view",method=RequestMethod.GET)
-	public String viewGet(@RequestParam(name="id") int id,@RequestParam(name="action") String action,
+	public String viewGet(@RequestParam(name="username") String username,@RequestParam(name="action") String action,
 		Model model) throws ParseException
 	{
-		Todo todo=todoService.findTodo(id);
+		Todo todo=todoService.findTodo(username);
 		if(todo==null)
 		{
 			System.out.println("Khong tim thay todo de view");
@@ -187,7 +187,7 @@ public class TodoController {
 		model.addAttribute("todo", todoModel);
 		
 		if (action.equals("delete")) {
-			todoService.deleteTodo(id);
+			todoService.deleteTodo(username);
 			return "redirect:/todo";
 		}
 		
@@ -197,9 +197,9 @@ public class TodoController {
 	
 	
 	@RequestMapping(value="delete",method=RequestMethod.POST)
-	public String deletePost(@RequestParam(name="id") int id, Model model) throws ParseException
+	public String deletePost(@RequestParam(name="username") String username, Model model) throws ParseException
 	{
-		todoService.deleteTodo(id);
+		todoService.deleteTodo(username);
 		return "redirect:/todo";
 	}
 	

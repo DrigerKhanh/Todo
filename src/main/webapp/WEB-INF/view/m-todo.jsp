@@ -54,7 +54,7 @@
 </div>
 	<table class="table">
 		<tr>
-			<th>No.</th>
+			<th>Username</th>
 			<th>Name</th>
 			<th>Status</th>
 			<th>Start Date</th>
@@ -64,45 +64,45 @@
 		</tr>
 	<c:forEach var="todo" items="${list}">
 		<tr>
-			<td>${todo.id }</td>
+			<td>${todo.username }</td>
 			<td>${todo.name}</td>
 			<td>${todo.status }</td>
 			<td>${todo.startDate }</td>
 			<td>${todo.startAt }</td>
 			<td>${todo.endAt }</td>
 			<c:if test="${todo.status eq 'New' }">
-				<form:form action="todo/start?id=${todo.id }" method="post">
-					<input type="hidden" name="id" value="${todo.id }">
+				<form:form action="todo/start?username=${todo.username }" method="post">
+					<input type="hidden" name="username" value="${todo.username }">
 					<td><button class="input" type="submit">Start</button></td>
 				</form:form>
 			</c:if>
 			<c:if test="${todo.status eq 'New'}">
-				<form:form action="todo/cancel?id=${todo.id }" method="post">
-					<input type="hidden" name="id" value="${todo.id }">
+				<form:form action="todo/cancel?username=${todo.username }" method="post">
+					<input type="hidden" name="username" value="${todo.username }">
 					<td><button class="input" type="submit">Cancel</button>
 				</form:form>
 			</c:if>
 			<c:if test="${todo.status eq 'In-progress' }">
-				<form:form action="todo/end?id=${todo.id }" method="post">
-					<input type="hidden" name="id" value="${todo.id }">
+				<form:form action="todo/end?username=${todo.username }" method="post">
+					<input type="hidden" name="username" value="${todo.username }">
 					<td><button class="input" type="submit">End</button></td>
 				</form:form>
 			</c:if>			
 			<c:if test="${todo.status eq 'New' or todo.status eq 'In-progress' or todo.status eq 'Done'or todo.status eq 'Canceled'}">
-						<form:form action="todo/view?id=${todo.id }" method="post">
-						<input type="hidden" name="id" value="${todo.id}">
+						<form:form action="todo/view?username=${todo.username }" method="post">
+						<input type="hidden" name="username" value="${todo.username}">
 						<td><button class="input" type="submit">View</button></td>
 						</form:form>
 					</c:if> 
 					<c:if test="${todo.status eq 'New'}">
-						<form:form action="todo/update?id=${todo.id }" method="get">
-						<input type="hidden" name="id" value="${todo.id}">
+						<form:form action="todo/update?username=${todo.username }" method="get">
+						<input type="hidden" name="username" value="${todo.username}">
 						<td><button class="input" type="submit">Update</button></td>
 						</form:form>
 					</c:if> 
 					<c:if test="${todo.status eq 'New' or todo.status eq 'Cancel' or todo.status eq 'Done' or todo.status eq 'Canceled'}">
-						<form:form action="todo/delete?id=${todo.id }" method="post">
-						<input type="hidden" name="id" value="${todo.id}">
+						<form:form action="todo/delete?username=${todo.username }" method="post">
+						<input type="hidden" name="username" value="${todo.username}">
 							<td><button class="input" type="submit">Delete</button></td>
 						</form:form>
 					</c:if>

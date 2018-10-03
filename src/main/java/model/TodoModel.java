@@ -7,7 +7,7 @@ import java.util.Date;
 import entity.Todo;
 
 public class TodoModel {
-	private int id;
+	private String username;
 	private String name;
 	private String status;
 	private String startDate;
@@ -18,7 +18,7 @@ public class TodoModel {
 	public Todo toTodo()
 	{
 		Todo todo=new Todo();
-		todo.setId(this.getId());
+		todo.setUsername(this.getUsername());
 		todo.setName(this.getName());
 		todo.setStatus(this.getStatus());
 		SimpleDateFormat date=new SimpleDateFormat("yyyy-MM-dd");
@@ -37,7 +37,7 @@ public class TodoModel {
 	
 	public void fromTodo(Todo todo) throws ParseException
 	{
-		this.setId(todo.getId());
+		this.setUsername(todo.getUsername());
 		this.setName(todo.getName());
 		this.setStatus(todo.getStatus());
 		SimpleDateFormat date=new SimpleDateFormat("yyyy-MM-dd");
@@ -46,12 +46,15 @@ public class TodoModel {
 	    this.setEndAt(todo.getEndAt());
 	    this.setAction(todo.getAction());		
 	}
-	public int getId() {
-		return id;
+	
+	public String getUsername() {
+		return username;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
 	public String getName() {
 		return name;
 	}

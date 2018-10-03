@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,8 +15,8 @@ import javax.persistence.Table;
 @Table(name="todo") 
 public class Todo {
 	@Id
-	@GeneratedValue
-	private int id;
+	@JoinColumn(name="username")
+	private String username;
 	@Column(name="name")
 	private String name;
 	@Column(name="status")
@@ -28,11 +29,13 @@ public class Todo {
 	private String endAt;
 	@Column(name="actions")
 	private String action;
-	public int getId() {
-		return id;
+	
+	
+	public String getUsername() {
+		return username;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getName() {
 		return name;

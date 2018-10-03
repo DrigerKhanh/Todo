@@ -42,9 +42,9 @@
 	</form:form>
 	
 	<form:form modelAttribute="todo" action="view" method="get">
-		<form:input path="id" name="id" type="hidden"/>
+		<form:input path="username" name="username" type="hidden"/>
 		<c:if test="${todo.status eq 'New' }">
-			<td><button type="button" onclick="window.location.href='<spring:url value="/todo/update?id=${todo.id }" />' ">Edit</button>
+			<td><button type="button" onclick="window.location.href='<spring:url value="/todo/update?username=${todo.username }" />' ">Edit</button>
 		</c:if>
 		<td><button class="input" type="submit" name="action" value="delete">Delete</button>
 		<button type="button" onclick="window.location.href='<spring:url value="/todo" />' ">Cancel</button>

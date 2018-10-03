@@ -41,9 +41,9 @@ public class TodoService {
 	}
 	
 	@Transactional
-	public Todo findTodo(int id)
+	public Todo findTodo(String username)
 	{
-		return todoDao.findById(id);
+		return todoDao.findByUserName(username);
 	}
 	
 	@Transactional
@@ -54,8 +54,8 @@ public class TodoService {
 	}
 	
 	@Transactional
-	public void deleteTodo(int id)
+	public void deleteTodo(String username)
 	{
-		todoDao.deleteTodo(id);
+		todoDao.deleteTodo(username);
 	}
 }

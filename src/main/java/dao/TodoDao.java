@@ -33,9 +33,9 @@ public class TodoDao {
 		return result;
 	}
 	
-	public Todo findById(int id)
+	public Todo findByUserName(String username)
 	{
-		return sessionFactory.openSession().find(Todo.class,id);
+		return sessionFactory.openSession().find(Todo.class,username);
 	}
 	public List<Todo> findByName(String name)
 	{
@@ -51,8 +51,7 @@ public class TodoDao {
 	
 	public Todo createTodo(Todo todo)
 	{
-		int id=(int) sessionFactory.openSession().save(todo);
-		todo.setId(id);
+		Session session= (Session) sessionFactory.openSession().save(todo);
 		return todo;
 	}
 	
@@ -84,11 +83,11 @@ public class TodoDao {
 //		return todo;
 	}
 	
-	public void deleteTodo(int id)
+	public void deleteTodo(String username)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		Todo todo=session.find(Todo.class, id);
+		Todo todo=session.find(Todo.class, username);
 		session.delete(todo);
 		session.getTransaction().commit();
 		session.close();
